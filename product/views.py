@@ -20,10 +20,10 @@ def products_view(request):
 def product_detail_view(request, id):
     if request.method == 'GET':
         product_obj = Product.objects.get(id=id)
-        review =Review.objects.filter(product=product_obj)
+        review = Review.objects.filter(product=product_obj)
         context = {
             'products': product_obj,
-            'review': review
+            'reviews': review
         }
 
         return render(request, 'products/detail.html', context=context)
