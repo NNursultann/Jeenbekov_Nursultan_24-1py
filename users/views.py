@@ -44,15 +44,15 @@ def register_view(request):
         form = RegisterForm(data=request.POST)
 
         if form.is_valid():
-            password1, password2 = form.cleaned_data.get('password1')
+            password1, password2 = form.cleaned_data.get('password1'), form.cleaned_data.get('password2')
             if password1 == password2:
                 User.objects.create_user(
                     username=form.cleaned_data.get('username'),
                     password=form.cleaned_data.get('password1')
                 )
-                return redirect('/users/login/')
+                return redirect('/users/register/')
             else:
                 form.add_error('password1', 'ошибка')
-            return render(request, 'users/register.html', context={
-                'form': form
-            })
+        return render(request, 'users/register.html', context={
+            'form': form
+        })

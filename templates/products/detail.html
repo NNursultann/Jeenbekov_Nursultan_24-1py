@@ -21,6 +21,7 @@
     </style>
     <div class="product">
         <img src="/media/{{ products.image }}/" alt="">
+        <h4>author: {{ products.author }}</h4>
         <h1>{{ products.name }}</h1>
         <h4>{{ products.description }}</h4>
         <h4>{{ products.price }}$</h4>
@@ -35,6 +36,7 @@
         <div class="reviews">
             {% for review in reviews %}
                 <div class="review">
+                    <h4>{{ review.author }}</h4>
                     <h6>{{ review.text }}</h6>
                     <p>{{ review.create_date }}</p>
                 </div>
