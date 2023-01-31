@@ -1,18 +1,21 @@
 {% extends 'layouts/index.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'products.css' %}">
+{% endblock %}
 
 {% block content %}
-    <style type="text/css">
-        .products {
-            width: 80%;
-            margin-left: 10%;
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
     <div class="products">
         {% for product in products %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
+                    {% if product.image %}
+                        <img class="product_image" src="/media/{{ product.image }}/" alt="">
+                    {% else %}
+                        <img class="product_image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDxBClJiLK
+                        IN7S25p3gK_5aX_HSxGZ_kbnrA&usqp=CAU" alt="">
+                    {% endif %}
                     <h5 class="card-name">{{ product.name }}</h5>
                     <h6 class="card-price">{{ product.price }} $</h6>
                     <a href="/products/{{ product.id }}" class="card-link">More</a>
