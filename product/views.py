@@ -15,19 +15,18 @@ def products_view(request):
     if request.method == 'GET':
         products = Product.objects.all()
         search = request.GET.get('search')
-        page = request.GET.get('page', 1)
+        page = int(request.GET.get('page', 1))
 
         if search is not None:
-            products = Product.objects.filter(name__icontains=search) or \
-                       Product.objects.filter(description__icontains=search)
+            products = Product.objects.filter(name__icontains=search)
 
-        max_page = products.__len__()/ PAGINATION_LIMIT
+        max_page = products.__len__() / PAGINATION_LIMIT
         if round(max_page) < max_page:
             max_page = round(max_page) + 1
+        else:
+            max_page = round(max_page)
 
-        if max_page < 1:
-            max_page = 0
-        products = products[PAGINATION_LIMIT * (page -1): PAGINATION_LIMIT * page]
+        products = products[PAGINATION_LIMIT * (page - 1): PAGINATION_LIMIT * page]
 
         context = {
             'products': products,
